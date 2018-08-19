@@ -102,7 +102,7 @@ class SlackClient:
         timestamps = self.__get_timestamps()
         remove_size = total_size - threshold
         size = 0
-        for file_id, _ in timestamps:
+        for _, file_id in timestamps:
             file = files[file_id]
             size += file["size"]
             remove_files[file_id] = file
@@ -124,8 +124,8 @@ class SlackClient:
         for file in files.values():
             file_id = file["id"]
             timestamp = file["timestamp"]
-            timestamps.append((file_id, timestamp))
-        timestamps.sort(key=itemgetter(1), reverse=False)
+            timestamps.append((timestamp, file_id))
+        timestamps.sort(reverse=False)
         return timestamps
     
     def __get_total_size(self):
