@@ -12,13 +12,12 @@ import yaml
 
 class SlackClient:
     __access_point = "https://slack.com/api/"
-    __access_token = None
-    __channels = None
-    __files = None
-    __users = None
 
     def __init__(self, access_token):
         self.__access_token = access_token
+        self.__channels = None
+        self.__files = None
+        self.__users = None
     
     def channel_list(self, force_update = False):
         """ channelを返す．結果がない場合はslack APIを用いて取得する"""
