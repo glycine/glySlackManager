@@ -155,7 +155,7 @@ class SlackClient:
 if __name__ == '__main__':
     with open("conf.yaml", "r+") as f:
         conf = yaml.load(f)
-        size_threshold = int(conf['filesize_threshold'])
+        size_threshold = int(conf['filesize_threshold_mb'])
         
         client = SlackClient(conf['token'])
         files = client.files_list()
