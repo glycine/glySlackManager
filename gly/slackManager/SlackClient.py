@@ -163,7 +163,7 @@ if __name__ == '__main__':
         remove_files = client.get_remove_files(size_threshold)
         
         for file in remove_files.values():
-            if not conf['is_demo']:
+            if not conf['is_dryrun']:
                 client.remove_file(files["id"])
                 print("removed: ", file["id"], datetime.fromtimestamp(file["timestamp"]), file["name"])
             else:
