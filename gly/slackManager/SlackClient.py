@@ -154,22 +154,22 @@ class SlackClient:
 
 
 if __name__ == '__main__':
-    f = open("conf.yaml", "r+")
-    conf = yaml.load(f)
-    size_threshold = int(conf['filesize_threshold'])
-    
-    client = SlackClient(conf['token'])
-    files = client.files_list()
-    
-    remove_files = client.get_remove_files(size_threshold)
-    
-    for file in remove_files.values():
-        if not conf['is_demo']:
-            client.remove_file(files["id"])
-            print("removed: ", file["id"], datetime.fromtimestamp(file["timestamp"]), file["name"])
-        else:
-            print("remove-demo: ", file["id"], datetime.fromtimestamp(file["timestamp"]), file["name"])
-        break
+    with open("conf.yaml", "r+") as f:
+        conf = yaml.load(f)
+        size_threshold = int(conf['filesize_threshold'])
+        
+        client = SlackClient(conf['token'])
+        files = client.files_list()
+        
+        remove_files = client.get_remove_files(size_threshold)
+        
+        for file in remove_files.values():
+            if not conf['is_demo']:
+                client.remove_file(files["id"])
+                print("removed: ", file["id"], datetime.fromtimestamp(file["timestamp"]), file["name"])
+            else:
+                print("remove-demo: ", file["id"], datetime.fromtimestamp(file["timestamp"]), file["name"])
+            break
     
     
     
